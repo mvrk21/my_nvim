@@ -14,7 +14,16 @@ return {
       { 'j-hui/fidget.nvim', opts = {} },
 
       -- Allows extra capabilities provided by blink.cmp
-      'saghen/blink.cmp',
+      {
+        'saghen/blink.cmp',
+        dependencies = {
+          'rafamadriz/friendly-snippets',
+        },
+        version = '*',
+        opts = {
+          keymap = { preset = 'enter' },
+        },
+      },
     },
     config = function()
       -- Brief aside: **What is LSP?**
@@ -241,6 +250,8 @@ return {
       vim.list_extend(ensure_installed, {
         'stylua', -- Used to format Lua code
       })
+      -- In your Neovim configuration (e.g., init.lua or a dedicated file)
+
       require('mason-tool-installer').setup { ensure_installed = ensure_installed }
 
       require('mason-lspconfig').setup {
