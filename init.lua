@@ -168,10 +168,10 @@ vim.o.scrolloff = 10
 -- See `:help 'confirm'`
 
 vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
-vim.keymap.set('n', '<A-j>', ':m .+1<CR>==') --move line up(n)
-vim.keymap.set('n', '<A-k>', ':m .-2<CR>==') --move line down(n)
-vim.keymap.set('v', '<A-j>', ":m '>+1<CR>gv=gv") --move line up(v)
-vim.keymap.set('v', '<A-k>', ":m '<-2<CR>gv=gv") --move line down(v)
+vim.keymap.set('n', '<S-j>', ':m .+1<CR>==') --move line up(n)
+vim.keymap.set('n', '<S-k>', ':m .-2<CR>==') --move line down(n)
+vim.keymap.set('v', '<S-j>', ":m '>+1<CR>gv=gv") --move line up(v)
+vim.keymap.set('v', '<S-k>', ":m '<-2<CR>gv=gv") --move line down(v)
 
 -- [[ Basic Keymaps ]]
 --  See `:help vim.keymap.set()`
@@ -205,6 +205,9 @@ vim.keymap.set('n', '<C-h>', '<C-w><C-h>', { desc = 'Move focus to the left wind
 vim.keymap.set('n', '<C-l>', '<C-w><C-l>', { desc = 'Move focus to the right window' })
 vim.keymap.set('n', '<C-j>', '<C-w><C-j>', { desc = 'Move focus to the lower window' })
 vim.keymap.set('n', '<C-k>', '<C-w><C-k>', { desc = 'Move focus to the upper window' })
+
+-- tmux-sessionizer
+vim.keymap.set('n', '<C-f>', '<cmd>silent !tmux neww tmux-sessionizer<CR>')
 
 -- NOTE: Some terminals have colliding keymaps or are not able to send distinct keycodes
 -- vim.keymap.set("n", "<C-S-h>", "<C-w>H", { desc = "Move window to the left" })
