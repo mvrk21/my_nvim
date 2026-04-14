@@ -34,6 +34,13 @@ vim.schedule(function()
   vim.o.clipboard = 'unnamedplus'
 end)
 
+vim.api.nvim_create_autocmd('FileType', {
+  pattern = { 'javascriptreact', 'typescriptreact' },
+  callback = function()
+    vim.bo.commentstring = '{/*%s*/}' -- Default to JSX style
+  end,
+})
+
 -- Enable break indent
 vim.o.breakindent = true
 
@@ -172,6 +179,13 @@ rtp:prepend(lazypath)
 require('lazy').setup({
   -- NOTE: Plugins can be added with a link (or for a github repo: 'owner/repo' link).
   'NMAC427/guess-indent.nvim', -- Detect tabstop and shiftwidth automatically
+  {
+    'JoosepAlviste/nvim-ts-context-commentstring',
+    lazy = true,
+    opts = {
+      enable_autocmd = false,
+    },
+  },
 
   -- LSP Plugins
   {
@@ -186,9 +200,41 @@ require('lazy').setup({
       },
     },
   },
+  {
+    'nvim-mini/mini.comment',
+    event = 'VeryLazy',
+    opts = {
+      options = {
+        custom_commentstring = function()
+          return require('ts_context_commentstring.internal').calculate_commentstring() or vim.bo.commentstring
+        end,
+      },
+    },
+  },
+
+  -- {
+  --   'folke/ts-comments.nvim',
+  --   opts = {},
+  --   event = 'VeryLazy',
+  --   enabled = vim.fn.has 'nvim-0.10.0' == 1,
+  -- },
+
+  -- {
+  --   'folke/ts-comments.nvim',
+  --   opts = {},
+  --   event = 'VeryLazy',
+  --   enabled = vim.fn.has 'nvim-0.10.0' == 1,
+  -- },
 
   -- Highlight todo, notes, etc in comments
-  { 'folke/todo-comments.nvim', event = 'VimEnter', dependencies = { 'nvim-lua/plenary.nvim' }, opts = { signs = false } },
+  -- { 'folke/todo-comments.nvim', event = 'VimEnter', dependencies = { 'nvim-lua/plenary.nvim' }, opts = { signs = false } },
+  --
+
+  --
+  --   'folke/ts-comments.nvim',
+  --   opts = {},
+  --   event = 'VeryLazy',
+  -- },
 
   -- { -- Collection of various small independent plugins/modules
   --   'echasnovski/mini.nvim',
