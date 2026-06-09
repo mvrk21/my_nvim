@@ -287,6 +287,7 @@ require('lazy').setup({
   require 'kickstart.plugins.telescope',
   require 'kickstart.plugins.autoformat',
   require 'kickstart.plugins.autocomplete',
+  require 'kickstart.plugins.autotag',
   require 'kickstart.plugins.nvimSurround',
   require 'kickstart.plugins.colorscheme',
   require 'custom.plugins.treesitter',
